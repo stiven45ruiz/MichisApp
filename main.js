@@ -1,9 +1,8 @@
-console.log('hola')
-let limit = 3;
+const limit = 3;
+
 const API_KEY = '6bbe5462-9f3e-4b18-aace-f61ba127da3a'
-
-
-const API_URL =`https://api.thecatapi.com/v1/images/search?limit=${limit}&api_key=${API_KEY}`;
+const API_URL_RAMDOM =`https://api.thecatapi.com/v1/images/search?limit=${limit}&api_key=${API_KEY}`;
+const API_URL_FAVORITES =`https://api.thecatapi.com/v1/favourites?limit=${limit}&api_key=${API_KEY}`;
 
 // fetch(URL)
 //     .then(res => res.json())
@@ -13,32 +12,41 @@ const API_URL =`https://api.thecatapi.com/v1/images/search?limit=${limit}&api_ke
 //     })
 
 
+const spanError = document.getElementById('error')
+
+
 //wiht promises
-
-// for (let i = 0; i < limit; i++) {
-//     const image = document.createElement("img");
-    
-
-//     var currentDiv = document.getElementById("container");
-//     document.body.insertBefore(image, currentDiv);
-// }
-
-
-
 const img = document.querySelectorAll('.banner-image');
 const imgex = document.getElementsByClassName('banner-image');
 
-const refresh = async() =>{
+const loadRamdomMichis = async() =>{
     
-    const response = await fetch(API_URL);
+    const response = await fetch(API_URL_RAMDOM);
     const data = await response.json();
 
-
-    img.forEach((item, index) => {
+    if(response.status !==200){
+        spanError.innerHTML = `Hubo un error ${response.status}`
+    }else{
+        img.forEach((item, index) => {
         item.src = data[index].url;
-    });
+        });
+    }
     
 }
-const input = document.getElementById('buttoRefresh');
-input.onclick = refresh;
-refresh()
+//Codigo para Ejecutar loadRamdomMichis() sin onClick
+//const input = document.getElementById('buttoRefresh');
+//input.onclick = loadRamdomMichis;
+
+
+const loadFavoritesMichis = async() =>{
+    
+    const response = await fetch(API_URL_FAVORITES);
+    const data = await response.json();
+
+    if(response.status !==200){
+        spanError.innerHTML = `Hubo un error ${response.status}`
+    }
+}
+
+loadRamdomMichis();
+loadFavoritesMichis()
