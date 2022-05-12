@@ -1,0 +1,34 @@
+
+.ramdom-michis__container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 50px 20px;
+}
+.target{
+    border: 1px solid rgba(128, 128, 128, 0.678);
+    border-radius: 10px;
+    height: auto;
+    
+    margin: 0 auto;
+    padding: 30px 10px;
+    
+}
+.banner-image{
+    
+    width: 280px;
+}
+h1{
+    font-size: 30px;
+    text-align: center;
+}
+#buttoRefresh{
+    border: none;
+    background-color: beige;
+    height: 30px;
+    width: 100px;
+}
+#buttoRefresh:hover{
+    background-color: rgb(241, 241, 141);
+    border-radius: 5px;
+    cursor: pointer;
+}
