@@ -1,34 +1,91 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0 50px;
+    padding: 0;
+}
+
+h1{
+    font-size: 30px;
+    text-align: center;
+}
+.subtitle{
+    margin: 30px 0 30px 0;
+}
+#buttoRefresh{
+    border: none;
+    background-color: rgb(253, 253, 103);
+    height: 30px;
+    width: 100px;
+    margin: 30px 0;
+}
+#buttoRefresh:hover{
+    background-color: rgb(248, 248, 31);
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+#favoriteMichis{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 50px 20px;
+}
+.target-favorites{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+.favorite-image{
+    width: 280px;
+    padding: 30px 0;
+}
+.btn-favorite{
+    margin: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(255, 101, 101);
+}
+.btn-favorite:hover{
+    background-color: rgb(252, 53, 53);
+    cursor: pointer;
+}
+
+#ramdomMichis{
+    border-top: 1px solid gray;
+    margin: 50px 0;
+}
 
 .ramdom-michis__container{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 50px 20px;
 }
+
 .target{
-    border: 1px solid rgba(128, 128, 128, 0.678);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid gray;
     border-radius: 10px;
-    height: auto;
-    
-    margin: 0 auto;
-    padding: 30px 10px;
     
 }
 .banner-image{
-    
+    padding: 30px 0;
     width: 280px;
 }
-h1{
-    font-size: 30px;
-    text-align: center;
-}
-#buttoRefresh{
+.btn-add-favorites{
+    margin: 20px;
+    padding: 10px;
     border: none;
-    background-color: beige;
-    height: 30px;
-    width: 100px;
-}
-#buttoRefresh:hover{
-    background-color: rgb(241, 241, 141);
     border-radius: 5px;
+    background-color: rgb(127, 255, 101);
+}
+.btn-add-favorites:hover{
+    background-color: rgb(96, 248, 66);
     cursor: pointer;
 }
