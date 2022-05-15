@@ -2,9 +2,10 @@ const limit = 3;
 
 const API_KEY = '6bbe5462-9f3e-4b18-aace-f61ba127da3a';
 //URLs
-const API_URL_RAMDOM =`https://api.thecatapi.com/v1/images/search?limit=${limit}&api_key=${API_KEY}`;
-const API_URL_FAVORITES =`https://api.thecatapi.com/v1/favourites?api_key=${API_KEY}`;
-const API_URL_FAVORITES_DELETE =(id)=>`https://api.thecatapi.com/v1/favourites/${id}?api_key=${API_KEY}`;
+const API_URL_RAMDOM =`https://api.thecatapi.com/v1/images/search?limit=${limit}`;
+const API_URL_FAVORITES =`https://api.thecatapi.com/v1/favourites`;
+const API_URL_UPLOAD = `https://api.thecatapi.com/v1/images/upload`
+const API_URL_FAVORITES_DELETE =(id)=>`https://api.thecatapi.com/v1/favourites/${id}`;
 
 
 
@@ -55,7 +56,12 @@ const loadRamdomMichis = async() =>{
 const imgFav = document.querySelectorAll('.favorite-image');
 const loadFavoriteMichis = async() =>{
     
-    const response = await fetch(API_URL_FAVORITES);
+    const response = await fetch(API_URL_FAVORITES, {
+        method: 'GET',
+        headers:{
+            'x-api-key': API_KEY 
+        }
+    });
     const data = await response.json();
 
     if(response.status !==200){
@@ -97,6 +103,7 @@ const saveFavoritesMichis = async(id)=>{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',
+            'x-api-key': API_KEY
         },
         body: JSON.stringify({
             image_id: id
@@ -118,6 +125,9 @@ const saveFavoritesMichis = async(id)=>{
 const deleteFavoriteMichi = async(id)=>{
     const response = await fetch(API_URL_FAVORITES_DELETE(id),{
         method: 'DELETE',
+        headers:{
+            'x-api-key': API_KEY 
+        }
     })
     const data = await response.json()
     if(response.status !==200){
@@ -129,6 +139,34 @@ const deleteFavoriteMichi = async(id)=>{
     console.log('fav',response)
 }
 
+const uploadMichiPhoto = async()=>{
+
+    const form = document.getElementById('uploadingMichi');
+    const formData = new FormData(form);
+
+    console.log(formData.get('file'))
+
+    const response = await fetch(API_URL_UPLOAD, {
+        method: 'POST',
+        headers:{
+            // 'Conten-Type': 'multipart/form-data',
+            'X-api-key': API_KEY,
+        },
+        body: formData
+    })
+
+    const data = await response.json();
+
+    if (response.status !== 201) {
+        spanError.innerHTML = "Hubo un error: " + response.status + data.message;
+        console.log({data})
+    } else {
+        console.log('Foto de michi subida :)')
+        console.log({data})
+        console.log(data.url)
+        saveFavouriteMichi(data.id);
+    }
+}
 
 
 loadRamdomMichis();
